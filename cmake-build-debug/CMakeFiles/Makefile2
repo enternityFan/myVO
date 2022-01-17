@@ -114,12 +114,12 @@ test/clean: test/CMakeFiles/VoCode.dir/clean
 src/CMakeFiles/myslam.dir/all:
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/myslam.dir/build.make src/CMakeFiles/myslam.dir/depend
 	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/myslam.dir/build.make src/CMakeFiles/myslam.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=3,4,5,6,7,8,9 "Built target myslam"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=3,4,5,6,7,8,9,10 "Built target myslam"
 .PHONY : src/CMakeFiles/myslam.dir/all
 
 # Build rule for subdir invocation for target.
 src/CMakeFiles/myslam.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 8
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/myslam.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 0
 .PHONY : src/CMakeFiles/myslam.dir/rule
@@ -145,7 +145,7 @@ test/CMakeFiles/VoCode.dir/all: src/CMakeFiles/myslam.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/VoCode.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test/CMakeFiles/VoCode.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 0
 .PHONY : test/CMakeFiles/VoCode.dir/rule

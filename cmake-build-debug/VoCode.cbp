@@ -155,6 +155,9 @@
 		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/frame.cpp">
 			<Option target="myslam"/>
 		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/g2o_types.cpp">
+			<Option target="myslam"/>
+		</Unit>
 		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/map.cpp">
 			<Option target="myslam"/>
 		</Unit>
