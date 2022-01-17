@@ -5,7 +5,7 @@
 		<Option title="VoCode"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\;CMake Files\..\..\..\CLionProjects\;CMake Files\..\..\..\CLionProjects\3rdparty\;CMake Files\..\..\..\CLionProjects\3rdparty\Sophus\;CMake Files\..\..\..\CLionProjects\3rdparty\Sophus\build\;CMake Files\cmake_modules\;CMake Files\src\;CMake Files\test\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug"/>
@@ -38,12 +38,16 @@
 				</MakeCommands>
 			</Target>
 			<Target title="VoCode">
-				<Option output="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/VoCode" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug"/>
+				<Option output="/home/lifan/Code/SLAM_Code/VoCode/lib/libVoCode.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/lifan/CLionProjects/3rdparty/Sophus"/>
+					<Add directory="/home/lifan/Code/SLAM_Code/VoCode/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -54,19 +58,23 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 VoCode"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 VoCode"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="VoCode/fast">
-				<Option output="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/VoCode" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug"/>
+				<Option output="/home/lifan/Code/SLAM_Code/VoCode/lib/libVoCode.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/home/lifan/CLionProjects/3rdparty/Sophus"/>
+					<Add directory="/home/lifan/Code/SLAM_Code/VoCode/include"/>
+					<Add directory="/usr/local/include/opencv4"/>
 					<Add directory="/usr/include/c++/7"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
 					<Add directory="/usr/include/c++/7/backward"/>
@@ -77,18 +85,66 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 VoCode/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 VoCode/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/main.cpp">
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/include/myslam/config.h">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/include/myslam/frame.h">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/include/myslam/map.h">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/include/myslam/mappoint.h">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/camera.cpp">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/config.cpp">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/frame.cpp">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/map.cpp">
+			<Option target="VoCode"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/mappoint.cpp">
 			<Option target="VoCode"/>
 		</Unit>
 		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/../../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/../../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/../../../CLionProjects/3rdparty/Sophus/build/SophusConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\CLionProjects\3rdparty\Sophus\build\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/cmake_modules/FindG2O.cmake">
+			<Option virtualFolder="CMake Files\cmake_modules\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\src\"/>
+		</Unit>
+		<Unit filename="/home/lifan/Code/SLAM_Code/VoCode/test/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\test\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

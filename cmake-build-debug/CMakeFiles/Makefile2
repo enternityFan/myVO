@@ -63,42 +63,75 @@ CMAKE_BINARY_DIR = /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/VoCode.dir/all
+all: src/all
+all: test/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: src/preinstall
+preinstall: test/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/VoCode.dir/clean
+clean: src/clean
+clean: test/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/VoCode.dir
+# Directory level rules for directory src
+
+# Recursive "all" directory target.
+src/all: src/CMakeFiles/VoCode.dir/all
+.PHONY : src/all
+
+# Recursive "preinstall" directory target.
+src/preinstall:
+.PHONY : src/preinstall
+
+# Recursive "clean" directory target.
+src/clean: src/CMakeFiles/VoCode.dir/clean
+.PHONY : src/clean
+
+#=============================================================================
+# Directory level rules for directory test
+
+# Recursive "all" directory target.
+test/all:
+.PHONY : test/all
+
+# Recursive "preinstall" directory target.
+test/preinstall:
+.PHONY : test/preinstall
+
+# Recursive "clean" directory target.
+test/clean:
+.PHONY : test/clean
+
+#=============================================================================
+# Target rules for target src/CMakeFiles/VoCode.dir
 
 # All Build rule for target.
-CMakeFiles/VoCode.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VoCode.dir/build.make CMakeFiles/VoCode.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VoCode.dir/build.make CMakeFiles/VoCode.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target VoCode"
-.PHONY : CMakeFiles/VoCode.dir/all
+src/CMakeFiles/VoCode.dir/all:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/VoCode.dir/build.make src/CMakeFiles/VoCode.dir/depend
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/VoCode.dir/build.make src/CMakeFiles/VoCode.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target VoCode"
+.PHONY : src/CMakeFiles/VoCode.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/VoCode.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/VoCode.dir/all
+src/CMakeFiles/VoCode.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/VoCode.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/VoCode.dir/rule
+.PHONY : src/CMakeFiles/VoCode.dir/rule
 
 # Convenience name for target.
-VoCode: CMakeFiles/VoCode.dir/rule
+VoCode: src/CMakeFiles/VoCode.dir/rule
 .PHONY : VoCode
 
 # clean rule for target.
-CMakeFiles/VoCode.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/VoCode.dir/build.make CMakeFiles/VoCode.dir/clean
-.PHONY : CMakeFiles/VoCode.dir/clean
+src/CMakeFiles/VoCode.dir/clean:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/VoCode.dir/build.make src/CMakeFiles/VoCode.dir/clean
+.PHONY : src/CMakeFiles/VoCode.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
