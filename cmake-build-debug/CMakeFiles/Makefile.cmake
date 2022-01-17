@@ -15,10 +15,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "../cmake_modules/FindG2O.cmake"
   "../src/CMakeLists.txt"
   "../test/CMakeLists.txt"
-  "/usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake"
-  "/usr/local/lib/cmake/opencv4/OpenCVConfig.cmake"
-  "/usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake"
-  "/usr/local/lib/cmake/opencv4/OpenCVModules.cmake"
+  "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/share/OpenCV/OpenCVModules.cmake"
   "/usr/software/CLion/clion/bin/cmake/linux/share/cmake-3.20/Modules/CMakeCInformation.cmake"
   "/usr/software/CLion/clion/bin/cmake/linux/share/cmake-3.20/Modules/CMakeCXXInformation.cmake"
   "/usr/software/CLion/clion/bin/cmake/linux/share/cmake-3.20/Modules/CMakeCommonLanguageInclude.cmake"
@@ -58,5 +58,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "src/CMakeFiles/VoCode.dir/DependInfo.cmake"
+  "src/CMakeFiles/myslam.dir/DependInfo.cmake"
+  "test/CMakeFiles/VoCode.dir/DependInfo.cmake"
   )

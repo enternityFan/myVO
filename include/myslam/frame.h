@@ -26,7 +26,7 @@ namespace myslam{
 
     public:
        Frame();
-       Frame(long id,double time_stamp=0,Sophus::SE3 T_c_w=Sophus::SE3::SE3(),Camera::Ptr= nullptr,Mat color=cv::Mat::Mat(),Mat depth=cv::Mat::Mat());
+       Frame(long id,double time_stamp=0,Sophus::SE3 T_c_w=Sophus::SE3(),Camera::Ptr= nullptr,Mat color=Mat(),Mat depth=Mat());
        ~Frame();
 
        static Frame::Ptr createFrame();

@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named myslam
+
+# Build rule for target.
+myslam: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 myslam
+.PHONY : myslam
+
+# fast build rule for target.
+myslam/fast:
+	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/myslam.dir/build.make src/CMakeFiles/myslam.dir/build
+.PHONY : myslam/fast
+
+#=============================================================================
 # Target rules for targets named VoCode
 
 # Build rule for target.
@@ -126,7 +139,7 @@ VoCode: cmake_check_build_system
 
 # fast build rule for target.
 VoCode/fast:
-	$(MAKE) $(MAKESILENT) -f src/CMakeFiles/VoCode.dir/build.make src/CMakeFiles/VoCode.dir/build
+	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/VoCode.dir/build.make test/CMakeFiles/VoCode.dir/build
 .PHONY : VoCode/fast
 
 # Help Target
@@ -138,6 +151,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... VoCode"
+	@echo "... myslam"
 .PHONY : help
 
 
