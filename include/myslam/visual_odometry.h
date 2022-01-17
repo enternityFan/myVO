@@ -24,19 +24,32 @@ namespace myslam{
 
         VOState state_;
         Map::Ptr map_;
+
         Frame::Ptr ref_;
         Frame::Ptr curr_;
 
         cv::Ptr<cv::ORB> orb_; // orb detector and computer
-        vector<cv::Point3f> pts_3d_ref_; // 3d points in reference frame
+
+
         vector<cv::KeyPoint> keypoints_curr_; // keypoints in current frame
-        cv::Mat              descriptors_ref_; // descriptor in reference frame
-        cv::Mat              descriptors_curr_; // descriptor in current frame
-        vector<cv::DMatch>   feature_matches_;
+        cv::Mat descriptors_curr_;// descriptor in reference frame
+
+        cv::FlannBasedMatcher matcher_flann_; // flann matcher
+        vector<MapPoint::Ptr> match_3dpts_; // matched 3d points
+        vector<int> match_2dkp_index_; // matched 2d pixels (index of kp_curr)
+
+
+
+        //vector<cv::DMatch>   feature_matches_;
+        //vector<cv::Point3f> pts_3d_ref_; // 3d points in reference frame
+        //cv::Mat              descriptors_ref_; // descriptor in reference frame
+
+
 
         SE3 T_c_r_estimated_; // the estimated pose of current frame
         int num_inliers_; // number of inlier features in icp
         int num_lost_; // number of lost times;
+
 
         // parameters
         int num_of_features_; // number of features
@@ -48,7 +61,7 @@ namespace myslam{
 
         double key_frame_min_rot; // minimal rotation of two key_frames
         double key_frame_min_trans; // minimal translation of two key-frames
-
+        double map_point_erase_ratio_; // remove map point ratio
 
     public:
         VisualOdometry();
@@ -63,11 +76,15 @@ namespace myslam{
         void computeDescriptors();
         void featureMatching();
         void poseEstimationPnP();
-        void setRef3DPoints();
+        //void setRef3DPoints();
+        void optimizeMap();
 
+        void addMapPoints();
         void addKeyFrame();
         bool checkEstimatedPose();
         bool checkKeyFrame();
+
+        double getViewAngle(Frame::Ptr frame,MapPoint::Ptr point);
 
 
     };
