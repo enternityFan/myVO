@@ -2,6 +2,8 @@
 bin-debug/
 bin-release/
 cmake-build-debug/
+core
+processRecord.md
 [Oo]bj/
 [Bb]in/
 
