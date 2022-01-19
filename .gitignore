@@ -3,6 +3,7 @@ bin-debug/
 bin-release/
 /cmake-build-debug
 /lib
+/imgpath
 core
 processRecord.md
 [Oo]bj/

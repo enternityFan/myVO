@@ -65,6 +65,7 @@ namespace myslam {
                 if (checkEstimatedPose() == true) // a good estimation
                 {
                     curr_->T_c_w_ = T_c_r_estimated_;
+                    addEstimatedFrame();
                     optimizeMap();
                     num_lost_ = 0;
                     if (checkKeyFrame() == true) {
@@ -112,6 +113,7 @@ namespace myslam {
             if (curr_->isInFrame(p->pos_)) {
                 // add to candidate
                 p->visible_times_++;
+               p->observed_frames_.push_back(curr_.get());
                 candidate.push_back(p);
                 desp_map.push_back(p->descriptor_);
             }
@@ -262,6 +264,27 @@ namespace myslam {
 
     }
 
+    void VisualOdometry::addEstimatedFrame() {
+        if (map_->frames_.empty()) {
+            for (size_t i = 0; i < keypoints_curr_.size(); ++i) {
+                double d = curr_->findDepth(keypoints_curr_[i]);
+                if (d < 0)
+                    continue;
+                Vector3d p_world = ref_->camera_->pixel2world(
+                        Vector2d(keypoints_curr_[i].pt.x, keypoints_curr_[i].pt.y), curr_->T_c_w_, d
+                );
+
+                Eigen::Vector3d n = p_world - ref_->getCamCenter();
+                n.normalize();
+                MapPoint::Ptr map_point = MapPoint::createMapPoint(
+                        p_world, n, descriptors_curr_.row(i).clone(), curr_.get());
+                map_->insertMapPoint(map_point);
+
+            }
+        }
+        map_->insertEstimatedFrame(curr_);
+    }
+
     void VisualOdometry::addMapPoints() {
         // add the new map points into map
         vector<bool> matched(keypoints_curr_.size(), false);
@@ -307,7 +330,11 @@ namespace myslam {
                 continue;
             }
             if (iter->second->good_ == false) {
+                //cout<<"this point is not good!!!!!" << endl;
                 // TODO try triangulate this map point
+                int estimatedFrameCount = map_->frames_.size();
+
+
             }
             iter++;
         }
@@ -348,6 +375,11 @@ namespace myslam {
             unordered_map<unsigned long, Frame::Ptr> empty_keyframes;
             swap(empty_keyframes,map_->keyframes_);
             map_->keyframes_.clear();
+        }
+        if(!map_->frames_.empty()){
+            unordered_map<unsigned long,Frame::Ptr> empty_frames;
+            swap(empty_frames,map_->frames_);
+            map_->frames_.clear();
         }
 
         initTimes++;

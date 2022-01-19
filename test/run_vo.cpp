@@ -5,12 +5,35 @@
 
 #include <fstream>
 #include <boost/timer.hpp>
+#include <ctime>
+#include <stdlib.h>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/viz.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "myslam/config.h"
 #include "myslam/visual_odometry.h"
+
+string estimated_file = "/home/lifan/Code/SLAM_Code/VoCode/Evalutation/estimated.txt";
+
+//显示帧率函数1
+void ShowFPS_Method_One(Mat &dstImage) {
+    char str[20];	//存放字符串化的帧率
+    double fps;		//帧率
+    double t_front, t_now;					//用于中间计算
+
+    t_front = (double)cv::getTickCount();		//返回从操作系统启动到当前所经过的毫秒数
+    t_now = ((double)cv::getTickCount() - t_front) / cv::getTickFrequency();	//getTickFrequency返回每秒的计时周期数
+    fps = 1.0 / t_now;
+
+    string FPSstring("FPS:");
+    snprintf(str,4,"%.2f",fps);
+    FPSstring += str;
+    //在帧上显示"FPS:XXXX"
+    putText(dstImage, FPSstring, cv::Point(5, 20),
+            CV_FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(255, 255, 255));
+}
+
 
 int main(int argc,char** argv){
 
@@ -63,7 +86,21 @@ int main(int argc,char** argv){
     vis.showWidget("World",world_coor);
     vis.showWidget("Camera",camera_coor);
     cout<<"read total"<<rgb_files.size()<<"entries"<<endl;
+
+   // prepare for write estimated data.
+   vector<string> estimatedDatas;
+    string estimatedData="";
+    ofstream fout(estimated_file);
+    if(!fout){
+        cerr<<"open"+ estimated_file<<" failed!!!"<<endl;
+        return 0;
+    }
+
+
+    clock_t time_stt = clock(); // 计时
     for(int i=0;i<rgb_files.size();++i){
+
+
         cout<<"the rgb_file's name:"<<rgb_files[i]<<endl;
         Mat color = cv::imread(rgb_files[i]);
         cv::Mat depth = cv::imread(depth_files[i],-1);
@@ -77,12 +114,15 @@ int main(int argc,char** argv){
 
         boost::timer timer;
         vo->addFrame(pFrame);
+
         cout<<"VO costs time: " << timer.elapsed()<<endl;
 
         if(vo->state_ == myslam::VisualOdometry::LOST)
             break;
         SE3 Tcw = pFrame->T_c_w_.inverse();
-
+        Eigen::Quaterniond q(pFrame->T_c_w_.rotation_matrix());
+        estimatedData = to_string(rgb_times[i])+" "+ to_string(pFrame->T_c_w_.translation()(0,0))+" " +  to_string(pFrame->T_c_w_.translation()(1,0))+" " + to_string(pFrame->T_c_w_.translation()(2,0))+" " +  to_string(q.x()) +" "+ to_string(q.y()) +" "+ to_string(q.z())+" "+ to_string(q.w());
+        estimatedDatas.push_back(estimatedData);
         // show the map and the camera pose
         cv::Affine3d M(
                 cv::Affine3d::Mat3(
@@ -100,13 +140,28 @@ int main(int argc,char** argv){
             Vector2d pixel = pFrame->camera_->world2pixel ( p->pos_, pFrame->T_c_w_ );
             cv::circle ( img_show, cv::Point2f ( pixel ( 0,0 ),pixel ( 1,0 ) ), 5, cv::Scalar ( 0,255,0 ), 2 );
         }
-
+        ShowFPS_Method_One(img_show);
         cv::imshow ( "image", img_show );
         cv::waitKey ( 1 );
         vis.setWidgetPose ( "Camera", M );
         vis.spinOnce ( 1, false );
         cout<<endl;
     }
+    cout <<"time use in normal inverse is " << (clock() - time_stt)/(double)CLOCKS_PER_SEC / 60 << "s"<< endl;
+    cout<<"finished!!!"<<endl;
+
+    /**********************   save estimated trajectory ******************************/
+
+    for(auto each_line:estimatedDatas)
+        fout<<each_line<<endl;
+
+
+
+
+
+
 
     return 0;
 }
+
+

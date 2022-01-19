@@ -6,3 +6,7 @@
 /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/test/CMakeFiles/rebuild_cache.dir
 /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/test/CMakeFiles/edit_cache.dir
 /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/test/CMakeFiles/VoCode.dir
+/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Evalutation/CMakeFiles/rebuild_cache.dir
+/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Evalutation/CMakeFiles/edit_cache.dir
+/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Evalutation/CMakeFiles/processGroundTruth.dir
+/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/Evalutation/CMakeFiles/trajectoryError.dir

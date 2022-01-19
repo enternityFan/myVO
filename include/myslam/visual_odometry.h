@@ -81,6 +81,7 @@ namespace myslam{
 
         void addMapPoints();
         void addKeyFrame();
+        void addEstimatedFrame();
         bool checkEstimatedPose();
         bool checkKeyFrame();
 

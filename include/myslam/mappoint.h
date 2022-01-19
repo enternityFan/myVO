@@ -17,14 +17,14 @@ namespace myslam{
         unsigned long id_;
         static unsigned long factory_id_;
         bool good_;
-        Eigen::Vector3d pos_;
-        Eigen::Vector3d norm_;
-        cv::Mat descriptor_;
+        Eigen::Vector3d pos_;  // Position in world
+        Eigen::Vector3d norm_;  // Normal of viewing direction
+        cv::Mat descriptor_;  // Descriptor for matching
 
-        list<Frame*> observed_frames_;
+        list<Frame*> observed_frames_;  // key-frames that can observe this point
 
-        int matched_times_;
-        int visible_times_;
+        int matched_times_;  // being an inliner in pose estimation
+        int visible_times_;  // being visible in current frame
 
 
         MapPoint();

@@ -142,6 +142,32 @@ VoCode/fast:
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/VoCode.dir/build.make test/CMakeFiles/VoCode.dir/build
 .PHONY : VoCode/fast
 
+#=============================================================================
+# Target rules for targets named processGroundTruth
+
+# Build rule for target.
+processGroundTruth: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 processGroundTruth
+.PHONY : processGroundTruth
+
+# fast build rule for target.
+processGroundTruth/fast:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/processGroundTruth.dir/build.make Evalutation/CMakeFiles/processGroundTruth.dir/build
+.PHONY : processGroundTruth/fast
+
+#=============================================================================
+# Target rules for targets named trajectoryError
+
+# Build rule for target.
+trajectoryError: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 trajectoryError
+.PHONY : trajectoryError
+
+# fast build rule for target.
+trajectoryError/fast:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/trajectoryError.dir/build.make Evalutation/CMakeFiles/trajectoryError.dir/build
+.PHONY : trajectoryError/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -152,6 +178,8 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... VoCode"
 	@echo "... myslam"
+	@echo "... processGroundTruth"
+	@echo "... trajectoryError"
 .PHONY : help
 
 

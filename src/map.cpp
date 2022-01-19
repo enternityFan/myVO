@@ -20,6 +20,18 @@ namespace myslam{
         }
     }
 
+    void Map::insertEstimatedFrame(Frame::Ptr frame) {
+        cout<<"frame size = " << frames_.size()<<endl;
+        if(frames_.find(frame->id_) == frames_.end()){
+            frames_.insert(make_pair(frame->id_,frame));
+        }
+        else
+        {
+            frames_[frame->id_] = frame;
+        }
+
+    }
+
     void Map::insertMapPoint(MapPoint::Ptr map_point) {
         if(map_points_.find(map_point->id_) == map_points_.end()){
             map_points_.insert(make_pair(map_point->id_,map_point));

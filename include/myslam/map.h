@@ -18,12 +18,13 @@ namespace myslam {
     public:
         typedef shared_ptr<Map> Ptr;
         unordered_map<unsigned long, MapPoint::Ptr> map_points_;
+        unordered_map<unsigned long,Frame::Ptr> frames_; // store valid frame(The pose has been estimated)
         unordered_map<unsigned long, Frame::Ptr> keyframes_;
 
         Map() {}
 
         void insertKeyFrame(Frame::Ptr frame);
-
+        void insertEstimatedFrame(Frame::Ptr frame);
         void insertMapPoint(MapPoint::Ptr map_point);
 
 

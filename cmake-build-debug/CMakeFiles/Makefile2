@@ -65,17 +65,37 @@ CMAKE_BINARY_DIR = /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug
 # The main recursive "all" target.
 all: src/all
 all: test/all
+all: Evalutation/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: src/preinstall
 preinstall: test/preinstall
+preinstall: Evalutation/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: src/clean
 clean: test/clean
+clean: Evalutation/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory Evalutation
+
+# Recursive "all" directory target.
+Evalutation/all: Evalutation/CMakeFiles/processGroundTruth.dir/all
+Evalutation/all: Evalutation/CMakeFiles/trajectoryError.dir/all
+.PHONY : Evalutation/all
+
+# Recursive "preinstall" directory target.
+Evalutation/preinstall:
+.PHONY : Evalutation/preinstall
+
+# Recursive "clean" directory target.
+Evalutation/clean: Evalutation/CMakeFiles/processGroundTruth.dir/clean
+Evalutation/clean: Evalutation/CMakeFiles/trajectoryError.dir/clean
+.PHONY : Evalutation/clean
 
 #=============================================================================
 # Directory level rules for directory src
@@ -158,6 +178,58 @@ VoCode: test/CMakeFiles/VoCode.dir/rule
 test/CMakeFiles/VoCode.dir/clean:
 	$(MAKE) $(MAKESILENT) -f test/CMakeFiles/VoCode.dir/build.make test/CMakeFiles/VoCode.dir/clean
 .PHONY : test/CMakeFiles/VoCode.dir/clean
+
+#=============================================================================
+# Target rules for target Evalutation/CMakeFiles/processGroundTruth.dir
+
+# All Build rule for target.
+Evalutation/CMakeFiles/processGroundTruth.dir/all:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/processGroundTruth.dir/build.make Evalutation/CMakeFiles/processGroundTruth.dir/depend
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/processGroundTruth.dir/build.make Evalutation/CMakeFiles/processGroundTruth.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=11,12 "Built target processGroundTruth"
+.PHONY : Evalutation/CMakeFiles/processGroundTruth.dir/all
+
+# Build rule for subdir invocation for target.
+Evalutation/CMakeFiles/processGroundTruth.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Evalutation/CMakeFiles/processGroundTruth.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 0
+.PHONY : Evalutation/CMakeFiles/processGroundTruth.dir/rule
+
+# Convenience name for target.
+processGroundTruth: Evalutation/CMakeFiles/processGroundTruth.dir/rule
+.PHONY : processGroundTruth
+
+# clean rule for target.
+Evalutation/CMakeFiles/processGroundTruth.dir/clean:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/processGroundTruth.dir/build.make Evalutation/CMakeFiles/processGroundTruth.dir/clean
+.PHONY : Evalutation/CMakeFiles/processGroundTruth.dir/clean
+
+#=============================================================================
+# Target rules for target Evalutation/CMakeFiles/trajectoryError.dir
+
+# All Build rule for target.
+Evalutation/CMakeFiles/trajectoryError.dir/all:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/trajectoryError.dir/build.make Evalutation/CMakeFiles/trajectoryError.dir/depend
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/trajectoryError.dir/build.make Evalutation/CMakeFiles/trajectoryError.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles --progress-num=13,14 "Built target trajectoryError"
+.PHONY : Evalutation/CMakeFiles/trajectoryError.dir/all
+
+# Build rule for subdir invocation for target.
+Evalutation/CMakeFiles/trajectoryError.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 Evalutation/CMakeFiles/trajectoryError.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lifan/Code/SLAM_Code/VoCode/cmake-build-debug/CMakeFiles 0
+.PHONY : Evalutation/CMakeFiles/trajectoryError.dir/rule
+
+# Convenience name for target.
+trajectoryError: Evalutation/CMakeFiles/trajectoryError.dir/rule
+.PHONY : trajectoryError
+
+# clean rule for target.
+Evalutation/CMakeFiles/trajectoryError.dir/clean:
+	$(MAKE) $(MAKESILENT) -f Evalutation/CMakeFiles/trajectoryError.dir/build.make Evalutation/CMakeFiles/trajectoryError.dir/clean
+.PHONY : Evalutation/CMakeFiles/trajectoryError.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
