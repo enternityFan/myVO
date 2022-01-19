@@ -32,6 +32,8 @@ using cv::Mat;
 using namespace std;
 
 
+#define SUCCESS 1;
+#define FAILED 0;
 
 
 #endif //VOCODE_COMMON_INCLUDE_H

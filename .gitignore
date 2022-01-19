@@ -1,7 +1,8 @@
 # Build and Release Folders
 bin-debug/
 bin-release/
-cmake-build-debug/
+/cmake-build-debug
+/lib
 core
 processRecord.md
 [Oo]bj/

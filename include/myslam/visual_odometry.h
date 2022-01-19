@@ -74,7 +74,7 @@ namespace myslam{
         // inner operation
         void extractKeyPoints();
         void computeDescriptors();
-        void featureMatching();
+        bool featureMatching();
         void poseEstimationPnP();
         //void setRef3DPoints();
         void optimizeMap();
@@ -86,6 +86,11 @@ namespace myslam{
 
         double getViewAngle(Frame::Ptr frame,MapPoint::Ptr point);
 
+
+        void initAllResource();
+
+
+        long int initTimes = 0;
 
     };
 

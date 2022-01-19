@@ -42,6 +42,7 @@ namespace myslam {
         switch (state_) {
             case INITIALIZING: {
                 state_ = OK;
+                initAllResource();
                 curr_ = ref_ = frame;
                 //map_->insertKeyFrame(frame);
                 // extract features from first frame
@@ -56,7 +57,10 @@ namespace myslam {
                 curr_->T_c_w_ = ref_->T_c_w_;
                 extractKeyPoints();
                 computeDescriptors();
-                featureMatching();
+                if(!featureMatching()){
+                    state_ = INITIALIZING;
+                    break;
+                }
                 poseEstimationPnP();
                 if (checkEstimatedPose() == true) // a good estimation
                 {
@@ -96,7 +100,7 @@ namespace myslam {
         cout << "descriptor computation cost time: " << timer.elapsed() << endl;
     }
 
-    void VisualOdometry::featureMatching() {
+    bool VisualOdometry::featureMatching() {
         boost::timer timer;
         vector<cv::DMatch> matches;
         // select the candidates in map
@@ -114,70 +118,34 @@ namespace myslam {
         }
 
         matcher_flann_.match(desp_map, descriptors_curr_, matches);
-        // select the best matches
-        float min_dis = std::min_element(
-                matches.begin(), matches.end(),
-                [](const cv::DMatch &m1, const cv::DMatch &m2) {
-                    return m1.distance < m2.distance;
-                })->distance;
+        if (!matches.empty()) {
+            // select the best matches
+            float min_dis = std::min_element(
+                    matches.begin(), matches.end(),
+                    [](const cv::DMatch &m1, const cv::DMatch &m2) {
+                        return m1.distance < m2.distance;
+                    })->distance;
 
-        match_3dpts_.clear();
-        match_2dkp_index_.clear();
-        for (cv::DMatch &m: matches) {
-            if (m.distance < max<float>(min_dis * match_ratio_, 30.0)) {
-                match_3dpts_.push_back(candidate[m.queryIdx]);
-                match_2dkp_index_.push_back(m.trainIdx);
+            match_3dpts_.clear();
+            match_2dkp_index_.clear();
+            for (cv::DMatch &m: matches) {
+                if (m.distance < max<float>(min_dis * match_ratio_, 30.0)) {
+                    match_3dpts_.push_back(candidate[m.queryIdx]);
+                    match_2dkp_index_.push_back(m.trainIdx);
+                }
             }
+            cout << "good matches: " << match_3dpts_.size() << endl;
+            cout << "match cost time: " << timer.elapsed() << endl;
         }
-        cout << "good matches: " << match_3dpts_.size() << endl;
-        cout << "match cost time: " << timer.elapsed() << endl;
+        else
+        {
+            cout<<"matches failed! try init again..." << endl;
+            return FAILED;
+        }
+        return SUCCESS;
     }
 
-    /*
-    void VisualOdometry::featureMatching() {
 
-        // match desp_ref and desp_curr,use OpenCV's brute force match
-        boost::timer timer;
-        vector<cv::DMatch> matches;
-        // select the candidates in map
-        Mat desp_map;
-
-        vector<MapPoint::Ptr> candidate;
-        for( auto& allpoints:map_->map_points_)
-        {
-            MapPoint::Ptr &p = allpoints.second;
-            // check if p in curr frame image
-            if( curr_->isInFrame(p->pos_))
-            {
-                // add to candidate
-                p->visible_times_++;
-                candidate.push_back(p);
-                desp_map.push_back(p->descriptor_);
-            }
-        }
-
-        matcher_flann_.match(desp_map,descriptors_curr_,matches);
-        // select the best matches
-        float min_dis = std::min_element(
-                matches.begin(),matches.end(),
-                [](const cv::DMatch& m1,const cv::DMatch& m2)
-                {
-                    return m1.distance < m2.distance;
-                }
-                )->distance;
-
-        match_3dpts_.clear();
-        match_2dkp_index_.clear();
-        for(cv::DMatch& m : matches){
-            if(m.distance < max<float>(min_dis*match_ratio_,30.0))
-            {
-                match_3dpts_.push_back(candidate[m.queryIdx]);
-                match_2dkp_index_.push_back(m.trainIdx);
-            }
-        }
-        cout <<"good matches:" << match_3dpts_.size()<<endl;
-        cout<<"match cost time: "<< timer.elapsed()<<endl;
-    }*/
 
     void VisualOdometry::poseEstimationPnP() {
         vector<cv::Point3f> pts3d;
@@ -360,6 +328,33 @@ namespace myslam {
         n.normalize();
         return acos(n.transpose() * point->norm_);
     }
+
+
+    /************************* version0.5 update ***************************************/
+
+
+    void VisualOdometry::initAllResource() {
+
+
+
+        if(!map_->map_points_.empty())
+        {
+            unordered_map<unsigned long, MapPoint::Ptr> empty_map_points;
+            swap(empty_map_points,map_->map_points_);
+            map_->map_points_.clear();
+        }
+        if(!map_->keyframes_.empty()){
+
+            unordered_map<unsigned long, Frame::Ptr> empty_keyframes;
+            swap(empty_keyframes,map_->keyframes_);
+            map_->keyframes_.clear();
+        }
+
+        initTimes++;
+        cout<<"the "<<initTimes<<"'s init successed!"<<endl;
+        cout<<"\n\n----------------------------------------------------\n\n"<<endl;
+    }
+
 
 
 }

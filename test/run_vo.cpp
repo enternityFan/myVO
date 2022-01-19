@@ -8,7 +8,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/viz.hpp>
-
+#include <opencv2/imgproc/imgproc.hpp>
 #include "myslam/config.h"
 #include "myslam/visual_odometry.h"
 
@@ -47,6 +47,7 @@ int main(int argc,char** argv){
             break;
 
     }
+    rgb_files.pop_back();
 
     myslam::Camera::Ptr camera(new myslam::Camera());
 
@@ -63,6 +64,7 @@ int main(int argc,char** argv){
     vis.showWidget("Camera",camera_coor);
     cout<<"read total"<<rgb_files.size()<<"entries"<<endl;
     for(int i=0;i<rgb_files.size();++i){
+        cout<<"the rgb_file's name:"<<rgb_files[i]<<endl;
         Mat color = cv::imread(rgb_files[i]);
         cv::Mat depth = cv::imread(depth_files[i],-1);
         if(color.data== nullptr || depth.data == nullptr)
@@ -91,10 +93,19 @@ int main(int argc,char** argv){
 
                 );
 
-        cv::imshow("image",color);
-        cv::waitKey(100);
-        vis.setWidgetPose("Camera",M);
-        vis.spinOnce(1, false);
+        Mat img_show = color.clone();
+        for ( auto& pt:vo->map_->map_points_ )
+        {
+            myslam::MapPoint::Ptr p = pt.second;
+            Vector2d pixel = pFrame->camera_->world2pixel ( p->pos_, pFrame->T_c_w_ );
+            cv::circle ( img_show, cv::Point2f ( pixel ( 0,0 ),pixel ( 1,0 ) ), 5, cv::Scalar ( 0,255,0 ), 2 );
+        }
+
+        cv::imshow ( "image", img_show );
+        cv::waitKey ( 1 );
+        vis.setWidgetPose ( "Camera", M );
+        vis.spinOnce ( 1, false );
+        cout<<endl;
     }
 
     return 0;
